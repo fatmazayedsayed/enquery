@@ -1,0 +1,64 @@
+<nav class="navbar">
+    <div class="navbar-container">
+        <!-- Logo -->
+        <div class="navbar-logo">
+            <a routerLink="/home" class="logo-link">
+                <i class="fa fa-bars"></i> Enquery
+            </a>
+        </div>
+
+        <!-- Menu Toggle Button (Mobile) -->
+        <div class="menu-toggle" (click)="toggleMenu()">
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="nav-menu" [ngClass]="{ 'active': isMenuOpen() }">
+            <li class="nav-item">
+                <a routerLink="/home" routerLinkActive="active" class="nav-link" (click)="isMenuOpen.set(false)">
+                    Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/enquery-list" routerLinkActive="active" class="nav-link"
+                    (click)="isMenuOpen.set(false)">
+                    Enquiries
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/enquery-category" routerLinkActive="active" class="nav-link"
+                    (click)="isMenuOpen.set(false)">
+                    Categories
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/enquery-status" routerLinkActive="active" class="nav-link"
+                    (click)="isMenuOpen.set(false)">
+                    Status
+                </a>
+            </li>
+        </ul>
+
+        <!-- Authentication Buttons -->
+        <div class="auth-buttons" [ngClass]="{ 'active': isMenuOpen() }">
+            <ng-container *ngIf="!isAuthenticated()">
+                <button class="btn btn-login" (click)="login()">
+                    <i class="fa fa-sign-in"></i> Login
+                </button>
+                <button class="btn btn-register" (click)="register()">
+                    <i class="fa fa-user-plus"></i> Register
+                </button>
+            </ng-container>
+            <ng-container *ngIf="isAuthenticated()">
+                <span class="user-name">
+                    <i class="fa fa-user-circle"></i> {{ userName() }}
+                </span>
+                <button class="btn btn-logout" (click)="logout()">
+                    <i class="fa fa-sign-out"></i> Logout
+                </button>
+            </ng-container>
+        </div>
+    </div>
+</nav>
