@@ -15,3 +15,28 @@ site for all Api used: https://www.freeprojectapi.com/api.html
 in app create folder pages
 create components (status/categoy/login/dashboard/submit)
 generate ng g c enqueryStatus
+
+-------------
+for server part
+1-Open terminal at your project root (enquery) and run:
+npm install express cors
+Step 2: Create the Express Server File
+Create a file named server.js (with .js extension) at your project root
+Step 3: Create Data Folder & JSON File
+Create folder structure:
+Step 4: Create Proxy Configuration
+Create file proxy.conf.json at your project root (same level as angular.json
+
+
+
+Step 5: Update npm scripts
+
+This tells Angular: "When you see /api requests, forward them to http://localhost:3000"
+Open package.json and update the scripts section:
+
+Install concurrently to run both servers:
+
+npm install --save-dev concurrently
+
+Step 6: Run Both Servers
+Option A - Run both together:npm start

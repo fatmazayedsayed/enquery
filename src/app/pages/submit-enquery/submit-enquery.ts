@@ -118,7 +118,7 @@ export class SubmitEnquery implements OnInit {
     });
   }
 
-  onSubmit() {
+   onSubmit() {
     if (this.enquiryForm.invalid) {
       this.submitError.set('Please fill all required fields correctly.');
       return;
@@ -135,21 +135,21 @@ export class SubmitEnquery implements OnInit {
       enquiryDate: new Date().toISOString()
     };
 
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Enquiry submitted:', enquiryData);
-      this.isSubmitting.set(false);
-      this.submitMessage.set('Enquiry submitted successfully!');
-      this.enquiryForm.reset();
-
-      // Clear message after 3 seconds
-      setTimeout(() => {
-        this.submitMessage.set('');
-      }, 3000);
-    }, 1500);
+    this.http.post('/api/enquiries', enquiryData).subscribe({
+      next: (res) => {
+        this.isSubmitting.set(false);
+        this.submitMessage.set('Enquiry submitted successfully!');
+        this.enquiryForm.reset();
+        setTimeout(() => this.submitMessage.set(''), 3000);
+      },
+      error: (err) => {
+        console.error('Save failed', err);
+        this.isSubmitting.set(false);
+        this.submitError.set('Failed to submit enquiry. Try again.');
+      }
+    });
   }
-
-  resetForm() {
+   resetForm() {
     this.enquiryForm.reset();
     this.submitError.set('');
     this.submitMessage.set('');
