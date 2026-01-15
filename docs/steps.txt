@@ -1,0 +1,17 @@
+create new project steps
+ng new {project name}
+No,css,No
+npm i bootstrap
+npm i font-awesome
+-----------------
+in angular.json add
+ "styles": [
+              "src/styles.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ]
+
+site for all Api used: https://www.freeprojectapi.com/api.html
+-----------------
+in app create folder pages
+create components (status/categoy/login/dashboard/submit)
+generate ng g c enqueryStatus
