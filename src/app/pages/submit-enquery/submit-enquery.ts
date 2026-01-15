@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
  
 interface Category {
   categoryId: number;
@@ -36,10 +37,10 @@ export class SubmitEnquery implements OnInit {
   isSubmitting = signal(false);
   submitMessage = signal('');
   submitError = signal('');
-
+ 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient, private router: Router
   ) {
     this.initializeForm();
   }
@@ -118,7 +119,7 @@ export class SubmitEnquery implements OnInit {
     });
   }
 
-   onSubmit() {
+  onSubmit() {
     if (this.enquiryForm.invalid) {
       this.submitError.set('Please fill all required fields correctly.');
       return;
@@ -140,7 +141,7 @@ export class SubmitEnquery implements OnInit {
         this.isSubmitting.set(false);
         this.submitMessage.set('Enquiry submitted successfully!');
         this.enquiryForm.reset();
-        setTimeout(() => this.submitMessage.set(''), 3000);
+        setTimeout(() => this.router.navigate(['/dashboard']), 2000);
       },
       error: (err) => {
         console.error('Save failed', err);
