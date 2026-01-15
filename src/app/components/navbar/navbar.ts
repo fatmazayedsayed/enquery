@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
     selector: 'app-navbar',
@@ -14,23 +14,27 @@ export class Navbar {
     isAuthenticated = signal(false);
     userName = signal('');
 
+    constructor(private router: Router) { }
+
     toggleMenu() {
         this.isMenuOpen.update(value => !value);
     }
 
     login() {
-        // Navigate to login or open login modal
-        console.log('Redirect to login');
+        this.router.navigate(['/login']);
+        this.isMenuOpen.set(false);
     }
 
     logout() {
         this.isAuthenticated.set(false);
         this.userName.set('');
-        console.log('User logged out');
+        this.router.navigate(['/home']);
+        this.isMenuOpen.set(false);
     }
 
     register() {
-        // Navigate to register or open registration modal
-        console.log('Redirect to register');
+        this.router.navigate(['/login']);
+        this.isMenuOpen.set(false);
     }
 }
+
