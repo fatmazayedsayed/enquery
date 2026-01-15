@@ -1,0 +1,42 @@
+[
+    {
+        "categoryId": 1,
+        "categoryName": "Technical Support",
+        "isActive": true
+    },
+    {
+        "categoryId": 2,
+        "categoryName": "Billing & Payments",
+        "isActive": true
+    },
+    {
+        "categoryId": 3,
+        "categoryName": "Account Management",
+        "isActive": true
+    },
+    {
+        "categoryId": 4,
+        "categoryName": "Product Feedback",
+        "isActive": true
+    },
+    {
+        "categoryId": 5,
+        "categoryName": "Feature Request",
+        "isActive": true
+    },
+    {
+        "categoryId": 6,
+        "categoryName": "General Inquiry",
+        "isActive": true
+    },
+    {
+        "categoryId": 7,
+        "categoryName": "Bug Report",
+        "isActive": true
+    },
+    {
+        "categoryId": 8,
+        "categoryName": "Partnership",
+        "isActive": false
+    }
+]

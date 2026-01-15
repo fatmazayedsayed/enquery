@@ -1,0 +1,42 @@
+[
+    {
+        "statusId": 1,
+        "statusName": "Open",
+        "isActive": true
+    },
+    {
+        "statusId": 2,
+        "statusName": "In Progress",
+        "isActive": true
+    },
+    {
+        "statusId": 3,
+        "statusName": "On Hold",
+        "isActive": true
+    },
+    {
+        "statusId": 4,
+        "statusName": "Resolved",
+        "isActive": true
+    },
+    {
+        "statusId": 5,
+        "statusName": "Closed",
+        "isActive": true
+    },
+    {
+        "statusId": 6,
+        "statusName": "Rejected",
+        "isActive": true
+    },
+    {
+        "statusId": 7,
+        "statusName": "Pending Review",
+        "isActive": true
+    },
+    {
+        "statusId": 8,
+        "statusName": "Archived",
+        "isActive": false
+    }
+]

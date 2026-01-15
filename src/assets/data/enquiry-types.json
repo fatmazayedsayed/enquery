@@ -1,0 +1,42 @@
+[
+    {
+        "enquiryTypeId": 1,
+        "enquiryTypeName": "Question",
+        "isActive": true
+    },
+    {
+        "enquiryTypeId": 2,
+        "enquiryTypeName": "Complaint",
+        "isActive": true
+    },
+    {
+        "enquiryTypeId": 3,
+        "enquiryTypeName": "Suggestion",
+        "isActive": true
+    },
+    {
+        "enquiryTypeId": 4,
+        "enquiryTypeName": "Request",
+        "isActive": true
+    },
+    {
+        "enquiryTypeId": 5,
+        "enquiryTypeName": "Issue",
+        "isActive": true
+    },
+    {
+        "enquiryTypeId": 6,
+        "enquiryTypeName": "Feedback",
+        "isActive": true
+    },
+    {
+        "enquiryTypeId": 7,
+        "enquiryTypeName": "Support",
+        "isActive": true
+    },
+    {
+        "enquiryTypeId": 8,
+        "enquiryTypeName": "Other",
+        "isActive": false
+    }
+]

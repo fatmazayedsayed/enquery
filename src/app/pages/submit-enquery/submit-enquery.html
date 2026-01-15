@@ -1,1 +1,253 @@
-<p>submit-enquery works!</p>
+<div class="submit-enquery-container">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Header -->
+                <div class="mb-5">
+                    <h1 class="display-5 fw-bold text-primary mb-3">
+                        <i class="fa fa-paper-plane-o"></i> Submit Enquiry
+                    </h1>
+                    <p class="lead text-muted">Please fill out the form below to submit your enquiry. Our team will get
+                        back to you shortly.</p>
+                </div>
+
+                <!-- Success Message -->
+                @if (submitMessage()) {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fa fa-check-circle me-2"></i>
+                    <strong>Success!</strong> {{ submitMessage() }}
+                </div>
+                }
+
+                <!-- Error Message -->
+                @if (submitError()) {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fa fa-exclamation-circle me-2"></i>
+                    <strong>Error!</strong> {{ submitError() }}
+                </div>
+                }
+
+                <!-- Loading State -->
+                @if (isLoading()) {
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading form data...</p>
+                </div>
+                }
+
+                <!-- Form -->
+                @if (!isLoading()) {
+                <form [formGroup]="enquiryForm" (ngSubmit)="onSubmit()">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+
+                            <!-- Customer Name -->
+                            <div class="mb-4">
+                                <label for="customerName" class="form-label fw-bold">
+                                    <i class="fa fa-user text-primary"></i> Customer Name
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control"
+                                    [ngClass]="{ 'is-invalid': customerName?.touched && customerName?.invalid }"
+                                    id="customerName" formControlName="customerName" placeholder="Enter your full name">
+                                @if (customerName?.touched && customerName?.invalid) {
+                                <div class="invalid-feedback">
+                                    @if (customerName?.errors?.['required']) {
+                                    <small>Name is required</small>
+                                    }
+                                    @if (customerName?.errors?.['minlength']) {
+                                    <small>Name must be at least 2 characters</small>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-4">
+                                <label for="customerEmail" class="form-label fw-bold">
+                                    <i class="fa fa-envelope text-primary"></i> Email
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="email" class="form-control"
+                                    [ngClass]="{ 'is-invalid': customerEmail?.touched && customerEmail?.invalid }"
+                                    id="customerEmail" formControlName="customerEmail"
+                                    placeholder="your.email@example.com">
+                                @if (customerEmail?.touched && customerEmail?.invalid) {
+                                <div class="invalid-feedback">
+                                    @if (customerEmail?.errors?.['required']) {
+                                    <small>Email is required</small>
+                                    }
+                                    @if (customerEmail?.errors?.['email']) {
+                                    <small>Please enter a valid email</small>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="mb-4">
+                                <label for="customerPhone" class="form-label fw-bold">
+                                    <i class="fa fa-phone text-primary"></i> Phone Number
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="tel" class="form-control"
+                                    [ngClass]="{ 'is-invalid': customerPhone?.touched && customerPhone?.invalid }"
+                                    id="customerPhone" formControlName="customerPhone" placeholder="+1 (555) 000-0000">
+                                @if (customerPhone?.touched && customerPhone?.invalid) {
+                                <div class="invalid-feedback">
+                                    @if (customerPhone?.errors?.['required']) {
+                                    <small>Phone number is required</small>
+                                    }
+                                    @if (customerPhone?.errors?.['pattern']) {
+                                    <small>Please enter a valid phone number</small>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <!-- Category -->
+                            <div class="mb-4">
+                                <label for="categoryId" class="form-label fw-bold">
+                                    <i class="fa fa-folder text-primary"></i> Category
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select"
+                                    [ngClass]="{ 'is-invalid': categoryId?.touched && categoryId?.invalid }"
+                                    id="categoryId" formControlName="categoryId">
+                                    <option value="">Select a category</option>
+                                    @for (category of categories(); track category.categoryId) {
+                                    <option [value]="category.categoryId">
+                                        {{ category.categoryName }}
+                                    </option>
+                                    }
+                                </select>
+                                @if (categoryId?.touched && categoryId?.invalid) {
+                                <div class="invalid-feedback">
+                                    @if (categoryId?.errors?.['required']) {
+                                    <small>Please select a category</small>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <!-- Enquiry Type -->
+                            <div class="mb-4">
+                                <label for="enquiryType" class="form-label fw-bold">
+                                    <i class="fa fa-tag text-primary"></i> Enquiry Type
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select"
+                                    [ngClass]="{ 'is-invalid': enquiryType?.touched && enquiryType?.invalid }"
+                                    id="enquiryType" formControlName="enquiryType">
+                                    <option value="">Select enquiry type</option>
+                                    @for (type of enquiryTypes(); track type.enquiryTypeId) {
+                                    <option [value]="type.enquiryTypeId">
+                                        {{ type.enquiryTypeName }}
+                                    </option>
+                                    }
+                                </select>
+                                @if (enquiryType?.touched && enquiryType?.invalid) {
+                                <div class="invalid-feedback">
+                                    @if (enquiryType?.errors?.['required']) {
+                                    <small>Please select an enquiry type</small>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <!-- Status -->
+                            <div class="mb-4">
+                                <label for="statusId" class="form-label fw-bold">
+                                    <i class="fa fa-list text-primary"></i> Status
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select"
+                                    [ngClass]="{ 'is-invalid': statusId?.touched && statusId?.invalid }" id="statusId"
+                                    formControlName="statusId">
+                                    <option value="">Select a status</option>
+                                    @for (status of statuses(); track status.statusId) {
+                                    <option [value]="status.statusId">
+                                        {{ status.statusName }}
+                                    </option>
+                                    }
+                                </select>
+                                @if (statusId?.touched && statusId?.invalid) {
+                                <div class="invalid-feedback">
+                                    @if (statusId?.errors?.['required']) {
+                                    <small>Please select a status</small>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <!-- Message -->
+                            <div class="mb-4">
+                                <label for="message" class="form-label fw-bold">
+                                    <i class="fa fa-comment-o text-primary"></i> Message
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <textarea class="form-control"
+                                    [ngClass]="{ 'is-invalid': message?.touched && message?.invalid }" id="message"
+                                    formControlName="message" placeholder="Describe your enquiry in detail..."
+                                    rows="5"></textarea>
+                                <small class="form-text text-muted">Minimum 10 characters required</small>
+                                @if (message?.touched && message?.invalid) {
+                                <div class="invalid-feedback">
+                                    @if (message?.errors?.['required']) {
+                                    <small>Message is required</small>
+                                    }
+                                    @if (message?.errors?.['minlength']) {
+                                    <small>Message must be at least 10 characters</small>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <!-- Feedback (Optional) -->
+                            <div class="mb-4">
+                                <label for="feedback" class="form-label fw-bold">
+                                    <i class="fa fa-star-o text-primary"></i> Feedback (Optional)
+                                </label>
+                                <textarea class="form-control" id="feedback" formControlName="feedback"
+                                    placeholder="Any additional feedback or comments..." rows="3"></textarea>
+                            </div>
+
+                            <!-- Follow-up Date (Optional) -->
+                            <div class="mb-4">
+                                <label for="followUpDate" class="form-label fw-bold">
+                                    <i class="fa fa-calendar text-primary"></i> Follow-up Date (Optional)
+                                </label>
+                                <input type="date" class="form-control" id="followUpDate"
+                                    formControlName="followUpDate">
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="card-footer bg-light py-4">
+                            <div class="d-grid gap-2 d-sm-flex justify-content-end">
+                                <button type="button" class="btn btn-outline-secondary btn-lg" (click)="resetForm()"
+                                    [disabled]="isSubmitting()">
+                                    <i class="fa fa-redo me-2"></i> Reset
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-lg"
+                                    [disabled]="enquiryForm.invalid || isSubmitting()">
+                                    @if (!isSubmitting()) {
+                                    <i class="fa fa-paper-plane-o me-2"></i>
+                                    <span>Submit Enquiry</span>
+                                    } @else {
+                                    <span class="spinner-border spinner-border-sm me-2" role="status"
+                                        aria-hidden="true"></span>
+                                    <span>Submitting...</span>
+                                    }
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>
