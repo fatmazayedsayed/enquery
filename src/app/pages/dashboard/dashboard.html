@@ -1,1 +1,21 @@
-<p>dashboard works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <span class="navbar-brand">
+            <i class="fa fa-dashboard me-2"></i>Dashboard
+        </span>
+        <div class="ms-auto">
+            <span class="text-white me-3">
+                <i class="fa fa-user-circle me-1"></i>{{ authService.currentUser()?.username }}
+            </span>
+            <button class="btn btn-danger btn-sm" (click)="logout()">
+                <i class="fa fa-sign-out me-1"></i>Logout
+            </button>
+        </div>
+    </div>
+</nav>
+<div class="container mt-5">
+    <div class="alert alert-info">
+        <h4>Welcome, {{ authService.currentUser()?.username }}!</h4>
+        <p>You are now logged in. Access the submit enquiry page below.</p>
+    </div>
+</div>
